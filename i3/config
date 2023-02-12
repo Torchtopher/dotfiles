@@ -8,7 +8,9 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
+gaps inner 15
+exec --no-startup-id ~/.fehbg &
+exec --no-startup-id picom -b --config /home/chris/code/picom/build/src/picom.conf
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -72,13 +74,19 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-bindsym $mod+Shift+s exec sudo bash -c 'echo "mem" > /sys/power/state'
+bindsym $mod+Shift+s exec bash -c 'echo mem > /sys/power/state'
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
+# /home/chris/lock.sh && 
+bindsym $mod+Shift+m exec bash -c '/home/chris/lock.sh && echo mem > /sys/power/state'
 bindsym Print exec gnome-screenshot -i 
+
+# TODO
+# bindsym $mod+l exec 
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -107,6 +115,7 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -181,6 +190,10 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# class        border  backgr. text    indicator child_border
+client.focused #4c7899 #4c7899 #d8dee8 #bf616a
+client.focused_inactive #333333 #222222 #888888 #292d2e #222222
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
